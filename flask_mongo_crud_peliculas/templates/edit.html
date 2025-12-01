@@ -1,0 +1,75 @@
+{% extends "base.html" %}
+
+{% block title %}Editar {{ pelicula.nombre }}{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-md-8 mx-auto">
+            <div class="card">
+                <div class="card-header bg-warning text-dark">
+                    <h2 class="mb-0">✏️ Editar Película</h2>
+                </div>
+                <div class="card-body">
+                    <form method="post" enctype="multipart/form-data">
+                        <div class="row">
+                            <div class="col-md-8 mb-3">
+                                <label class="form-label"><strong>🎬 peliculas Completo</strong></label>
+                                <input type="text" class="form-control" name="nombre" 
+                                       value="{{ pelicula.nombre or '' }}" required>
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <label class="form-label"><strong>📅 Año</strong></label>
+                                <input type="number" class="form-control" name="año" 
+                                       value="{{ pelicula.año or '' }}" min="1900" max="2030">
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label"><strong>🎭 Género</strong></label>
+                                <input type="text" class="form-control" name="genero" 
+                                       value="{{ pelicula.genero or '' }}" 
+                                       placeholder="Ej: Acción, Comedia, Drama">
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label"><strong>⭐ Calificación (0-10)</strong></label>
+                                <input type="number" class="form-control" name="calificacion" 
+                                       value="{{ pelicula.calificacion or '' }}" step="0.1" min="0" max="10"
+                                       placeholder="Ej: 8.5">
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label"><strong>📝 Comentario o Reseña</strong></label>
+                            <textarea class="form-control" name="comentario" rows="5" 
+                                      placeholder="Escribe tu opinión sobre esta película...">{{ pelicula.comentario or '' }}</textarea>
+                            <div class="form-text">
+                                Comparte tu experiencia, lo que te gustó, lo que no, recomendaciones, etc.
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label"><strong>🖼️ Imagen de la Película</strong></label>
+                            <input type="file" class="form-control" name="imagen" accept="image/*">
+                            {% if pelicula.imagen %}
+                                <div class="mt-2">
+                                    <small>Imagen actual:</small>
+                                    <img src="{{ url_for('static', filename='uploads/' + pelicula.imagen) }}" 
+                                         class="img-thumbnail ms-2" style="max-height: 100px;">
+                                </div>
+                            {% endif %}
+                        </div>
+
+                        <div class="d-flex gap-2">
+                            <button type="submit" class="btn btn-success">💾 Guardar Cambios</button>
+                            <a href="{{ url_for('view_pelicula', id=pelicula.id) }}" class="btn btn-secondary">👁️ Ver Película</a>
+                            <a href="{{ url_for('index') }}" class="btn btn-outline-secondary">← Cancelar</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,50 @@
+body {
+    padding-bottom: 40px;
+    background: linear-gradient(135deg, #d066ea 0%, #764ba2 100%);
+    min-height: 100vh;
+}
+
+.container {
+    max-width: 1200px;
+}
+
+.navbar-brand {
+    font-weight: bold;
+    font-size: 1.5rem;
+}
+
+.card {
+    border: none;
+    border-radius: 15px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+}
+
+.card-body {
+    padding: 2rem;
+}
+
+.table {
+    background: hsl(157, 66%, 51%);
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.btn {
+    border-radius: 8px;
+    font-weight: 500;
+}
+
+.alert {
+    border-radius: 10px;
+    border: none;
+}
+
+.badge {
+    font-size: 0.8em;
+}
+
+h1, h2 {
+    color: rgb(163, 231, 74);
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+}

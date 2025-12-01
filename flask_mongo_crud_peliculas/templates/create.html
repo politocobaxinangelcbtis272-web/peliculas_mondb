@@ -1,0 +1,65 @@
+{% extends "base.html" %}
+{% block title %}Crear Peliculas faviritas{% endblock %}
+{% block content %}
+<div class="row">
+  <div class="col-md-8 mx-auto">
+    <h2 class="mb-4">🎬 Agregar Nueva Película</h2>
+   
+    <div class="mb-3">
+    <label class="form-label"><strong>🖼️ Película</strong></label>
+    <input class="form-control" type="file" name="imagen" accept="image/*">
+</div>
+
+    <div class="card">
+      <div class="card-body">
+        <form method="post" class="mt-3">
+          <div class="row">
+            <div class="col-md-12 mb-3">
+              <label class="form-label"><strong>🎭 peliculas completo</strong></label>
+              <input class="form-control form-control-lg" name="nombre" 
+                     placeholder="Ej: Avengers: Endgame" required>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-6 mb-3">
+              <label class="form-label"><strong>📅 Año de estreno</strong></label>
+              <input class="form-control" name="año" type="number" 
+                     min="1900" max="2030" placeholder="Ej: 2024">
+            </div>
+            <div class="col-md-6 mb-3">
+              <label class="form-label"><strong>🎪 Género</strong></label>
+              <input class="form-control" name="genero" 
+                     placeholder="Ej: Acción, Comedia, Drama">
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-6 mb-3">
+              <label class="form-label"><strong>⭐ Calificación (0-10)</strong></label>
+              <input class="form-control" name="calificacion" type="number" 
+                     step="0.1" min="0" max="10" placeholder="Ej: 8.5">
+            </div>
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label"><strong>💬 Comentario o reseña</strong></label>
+            <textarea class="form-control" name="comentario" rows="3" 
+                      placeholder="Escribe tu opinión sobre esta película..."></textarea>
+          </div>
+         
+          
+
+          <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+            <button class="btn btn-primary btn-lg me-md-2">
+              💾 Guardar Película
+            </button>
+            <a class="btn btn-secondary btn-lg" href="{{ url_for('index') }}">
+              ❌ Cancelar
+            </a>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+{% endblock %}

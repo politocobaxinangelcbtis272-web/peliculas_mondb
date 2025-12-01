@@ -1,0 +1,72 @@
+{% extends "base.html" %}
+
+{% block title %}Ver {{ pelicula.nombre }}{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-md-8 mx-auto">
+            <div class="card">
+                <div class="card-header bg-primary text-white">
+                    <h2 class="mb-0">🎬 {{ pelicula.nombre }}</h2>
+                </div>
+                <div class="card-body">
+                    {% if pelicula.imagen %}
+                    <div class="text-center mb-4">
+                        <img src="{{ url_for('static', filename='uploads/' + pelicula.imagen) }}" 
+                             class="img-fluid rounded" 
+                             style="max-height: 400px;" 
+                             alt="{{ pelicula.nombre }}">
+                    </div>
+                    {% endif %}
+                    
+                    <div class="row">
+                        <div class="col-md-6">
+                            <p><strong>📅 Año:</strong> {{ pelicula.año or 'No especificado' }}</p>
+                            <p><strong>🎭 Género:</strong> {{ pelicula.genero or 'No especificado' }}</p>
+                        </div>
+                        <div class="col-md-6">
+                            <p><strong>⭐ Calificación:</strong> 
+                                {% if pelicula.calificacion %}
+                                    {{ pelicula.calificacion }}/10
+                                {% else %}
+                                    No calificada
+                                {% endif %}
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <div class="mt-4">
+                        <h5>📝 Comentario o Reseña:</h5>
+                        <div class="border p-3 rounded bg-light">
+                            {% if pelicula.comentario %}
+                                <p class="mb-0">{{ pelicula.comentario }}</p>
+                            {% else %}
+                                <p class="text-muted mb-0">No hay comentarios para esta película.</p>
+                            {% endif %}
+                        </div>
+                    </div>
+                    
+                    <div class="mt-4">
+                        <a href="{{ url_for('create_pelicula') }}" class="btn btn-success"> 
+                            <i class="fas fa-plus"></i> Agregar Otra Película
+                        </a>
+
+                        <a href="{{ url_for('edit_pelicula', id=pelicula.id) }}" class="btn btn-warning">
+                            ✏️ Editar Película
+                        </a>
+                        <a href="{{ url_for('index') }}" class="btn btn-secondary">← Volver al Listado</a>
+                        
+                        <form action="{{ url_for('delete_pelicula', id=pelicula.id) }}" method="post" class="d-inline">
+                            <button type="submit" class="btn btn-danger" 
+                                    onclick="return confirm('¿Estás seguro de eliminar esta película?')">
+                                🗑️ Eliminar
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

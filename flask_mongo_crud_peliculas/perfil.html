@@ -1,0 +1,113 @@
+{% extends "base.html" %}
+
+{% block title %}Mi Perfil - CinePlus{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-8">
+        <div class="card shadow">
+            <div class="card-header bg-primary text-white">
+                <div class="d-flex justify-content-between align-items-center">
+                    <h3 class="mb-0"><i class="fas fa-user-circle"></i> Mi Perfil</h3>
+                    <span class="badge bg-light text-primary">Usuario Activo</span>
+                </div>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    
+                    <div class="col-md-4 text-center border-end">
+                        <div class="mb-4">
+                            <div class="mx-auto rounded-circle bg-gradient-primary text-white d-flex align-items-center justify-content-center" 
+                                 style="width: 120px; height: 120px; font-size: 3rem; background: linear-gradient(45deg, #007bff, #6610f2);">
+                                {{ user.username[0] | upper }}
+                            </div>
+                            <h4 class="mt-3">{{ user.username }}</h4>
+                            <span class="badge bg-success">
+                                <i class="fas fa-check-circle"></i> En línea
+                            </span>
+                        </div>
+                        
+                        <div class="list-group list-group-flush">
+                            <a href="{{ url_for('index') }}" class="list-group-item list-group-item-action">
+                                <i class="fas fa-film text-primary me-2"></i>Ver Películas
+                            </a>
+                            <a href="{{ url_for('create_pelicula') }}" class="btn btn-success me-md-2">  
+                                <i class="fas fa-plus me-2"></i>Nueva Película
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <div class="col-md-8">
+                        <h5 class="border-bottom pb-2">Información de la Sesión</h5>
+                        
+                        <div class="row mt-4">
+                            <div class="col-md-6 mb-3">
+                                <div class="card bg-light">
+                                    <div class="card-body">
+                                        <h6 class="card-title">
+                                            <i class="fas fa-user text-primary me-2"></i>Usuario
+                                        </h6>
+                                        <p class="card-text h5">{{ user.username }}</p>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="col-md-6 mb-3">
+                                <div class="card bg-light">
+                                    <div class="card-body">
+                                        <h6 class="card-title">
+                                            <i class="fas fa-clock text-info me-2"></i>Inicio de Sesión
+                                        </h6>
+                                        <p class="card-text">{{ user.login_time }}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <div class="card bg-light">
+                                    <div class="card-body">
+                                        <h6 class="card-title">
+                                            <i class="fas fa-id-badge text-warning me-2"></i>ID de Sesión
+                                        </h6>
+                                        <p class="card-text small font-monospace">{{ user.session_id }}</p>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="col-md-6 mb-3">
+                                <div class="card bg-light">
+                                    <div class="card-body">
+                                        <h6 class="card-title">
+                                            <i class="fas fa-database text-success me-2"></i>Estado
+                                        </h6>
+                                        <p class="card-text">
+                                            <span class="badge bg-success">Sesión Activa</span>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="mt-4">
+                            <h5 class="border-bottom pb-2">Acciones Rápidas</h5>
+                            <div class="d-grid gap-2 d-md-flex justify-content-md-start mt-3">
+                                <a href="{{ url_for('index') }}" class="btn btn-primary me-md-2">
+                                    <i class="fas fa-film me-2"></i>Ver Colección
+                                </a>
+                                <a href="{{ url_for('create_peliculas') }}" class="btn btn-success me-md-2">
+                                    <i class="fas fa-plus me-2"></i>Nueva Película
+                                </a>
+                                <a href="{{ url_for('logout') }}" class="btn btn-outline-danger">
+                                    <i class="fas fa-sign-out-alt me-2"></i>Cerrar Sesión
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

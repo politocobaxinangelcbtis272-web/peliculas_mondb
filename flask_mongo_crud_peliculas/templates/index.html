@@ -1,0 +1,121 @@
+{% extends "base.html" %}
+
+{% block title %}Mis Películas Favoritas{% endblock %}
+
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <div>
+        <h1>🎬 Mis Películas</h1>
+        <p class="text-muted">Bienvenido de nuevo, <strong>{{ session.user }}</strong></p>
+    </div>
+    <a class="btn btn-success btn-lg" href="{{ url_for('create_pelicula') }}">  
+        <i class="fas fa-plus"></i> Agregar Nueva
+    </a>
+</div>
+
+<div class="row mb-4">
+    <div class="col-md-4">
+        <div class="card bg-primary text-white">
+            <div class="card-body">
+                <div class="d-flex justify-content-between">
+                    <div>
+                        <h4>{{ stats.total_peliculas }}</h4>
+                        <p class="mb-0">Películas en total</p>
+                    </div>
+                    <div class="align-self-center">
+                        <i class="fas fa-film fa-2x"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card bg-success text-white">
+            <div class="card-body">
+                <div class="d-flex justify-content-between">
+                    <div>
+                        <h4>{{ session.user }}</h4>
+                        <p class="mb-0">Usuario activo</p>
+                    </div>
+                    <div class="align-self-center">
+                        <i class="fas fa-user fa-2x"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card bg-info text-white">
+            <div class="card-body">
+                <div class="d-flex justify-content-between">
+                    <div>
+                        <h4>{{ session.login_time.split(' ')[0] }}</h4>
+                        <p class="mb-0">Conectado desde</p>
+                    </div>
+                    <div class="align-self-center">
+                        <i class="fas fa-calendar fa-2x"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% if peliculas %}
+<div class="table-responsive">
+    <table class="table table-hover table-striped">
+        <thead class="table-dark">
+            <tr>
+                <th>peliculas</th>
+                <th>Año</th>
+                <th>Género</th>
+                <th>Calificación</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for pelicula in peliculas %}
+            <tr>
+                <td><strong>{{ pelicula.nombre }}</strong></td>
+                <td>{{ pelicula.año or '-' }}</td>
+                <td>{{ pelicula.genero or '-' }}</td>
+                <td>
+                    {% if pelicula.calificacion %}
+                        ⭐ {{ pelicula.calificacion }}/10
+                    {% else %}
+                        -
+                    {% endif %}
+                </td>
+                <td>
+                    <div class="btn-group btn-group-sm">
+                        <a href="{{ url_for('view_pelicula', id=pelicula.id) }}" 
+                           class="btn btn-info" title="Ver detalles">
+                            👁️ Ver
+                        </a>
+                        <a href="{{ url_for('edit_pelicula', id=pelicula.id) }}" 
+                           class="btn btn-warning" title="Editar película">
+                            ✏️ Editar
+                        </a>
+                        <form action="{{ url_for('delete_pelicula', id=pelicula.id) }}" 
+                              method="post" class="d-inline">
+                            <button type="submit" class="btn btn-danger" 
+                                    onclick="return confirm('¿Eliminar {{ pelicula.nombre }}?')"
+                                    title="Eliminar película">
+                                🗑️
+                            </button>
+                        </form>
+                    </div>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% else %}
+<div class="alert alert-info text-center">
+    <h4>📺 No hay películas registradas</h4>
+    <p>Comienza agregando tu primera película favorita.</p>
+    <a href="{{ url_for('create_pelicula') }}" class="btn btn-primary">Agregar Primera Película</a>  <!-- ✅ CORREGIDO -->
+</div>
+{% endif %}
+{% endblock %}
