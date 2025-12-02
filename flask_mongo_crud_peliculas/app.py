@@ -9,7 +9,7 @@ from datetime import datetime
 app = Flask(__name__)
 app.secret_key = os.environ.get("FLASK_SECRET", "dev-secret")
 
-MONGO_URI = os.environ.get("MONGO_URI" ,"mongodb+srv://peliculas:peliculas1253@peliculas.0nwysmz.mongodb.net/?peliculas=peliculas1253")
+MONGO_URI = os.environ.get("MONGO_URI" ,"mongodb+srv://peliculas:peliculas1253@peliculas.0nwysmz.mongodb.net/?retryWrites=true&w=majority")
 client = MongoClient(MONGO_URI)
 db = client['peliculas_db']
 peliculas_collection = db['peliculas']
